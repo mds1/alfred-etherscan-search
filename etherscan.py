@@ -54,7 +54,7 @@ def main(wf):
         icon = "img/usdc.png"
         url = "https://etherscan.io/token/0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48"
 
-    elif query == "m" or query == "ma" or query == "mak" or query == "make" or query == "maker":
+    elif query == "m" or query == "ma" or query == "mak" or query == "make" or query == "maker" or query == "mkr":
         title = "View Maker on Etherscan"
         icon = "img/maker.png"
         url = "https://etherscan.io/token/0x9f8f72aa9304c8b593d555f12ef6589cc3a579a2"
@@ -93,24 +93,24 @@ def main(wf):
         url = "https://etherscan.io/token/0x4ddc2d193948926d02f9b1fe9e1daa0718270ed5"
 
     elif query[-4:] == '.eth':
-        title = "Open ENS address '" + query + "'"
+        title = "View ENS address '" + query + "'"
         icon = 'img/ens.png'
         url = "https://etherscan.io/enslookup?q=" + query
 
     elif len(query) == 66 or len(query) == 64:
-        title = "Open transaction '" + query + "'"
+        title = "View transaction '" + query + "'"
         icon = 'icon.png'
         url = "https://etherscan.io/tx/" + query
 
     elif len(query) == 42 or len(query) == 40:
-        title = "Open address '" + query + "'"
+        title = "View address '" + query + "'"
         icon = 'icon.png'
         url = "https://etherscan.io/address/" + query
 
     else:
         # If alphanumeric, append .eth and use ENS
         if query.isalnum():
-            title = "Open ENS address '" + query + ".eth" + "'"
+            title = "View ENS address '" + query + ".eth" + "'"
             icon = 'img/ens.png'
             url = "https://etherscan.io/enslookup?q=" + query + ".eth"
 
@@ -119,7 +119,7 @@ def main(wf):
             splitQuery = filter(None, query.split('.'))
             ensPrefix = ".".join(splitQuery)
             ensDomain = ensPrefix + ".eth"
-            title = "Open ENS address '" + ensDomain
+            title = "View ENS address '" + ensDomain
             icon = 'img/ens.png'
             url = "https://etherscan.io/enslookup?q=" + ensDomain
 
