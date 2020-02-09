@@ -104,7 +104,22 @@ python etherscan.py $query</string>
 		</dict>
 	</array>
 	<key>readme</key>
-	<string></string>
+	<string>Etherscan Search
+===============
+
+Alfred workflow to quickly search addresses, transactions, and ENS Domains on Etherscan
+
+Usage
+-------------
+
+`es &lt;address&gt;`: Opens the provided address on Etherscan.                                                                                                                                                          
+
+`es &lt;transactionHash&gt;`: Opens the provided transaction hash on Etherscan.                                                                                                                                                 
+
+
+`es &lt;ensDomain&gt;`: Opens the provided ENS domain on Etherscan.Supports subdomains, and the `.eth` suffix will be added automatically if not provided.                                                         
+
+`es &lt;tokenName&gt;`: Opens the provided token on Etherscan. Supported values for `tokenName` include `dai`, `chai`, `sai`, `usdc`, `usdt` or `tether`, `mkr` or `maker`, `cdai`,&lt;br&gt;`csai`, `cusdc`, and `ceth`.</string>
 	<key>uidata</key>
 	<dict>
 		<key>06F2F5BE-36D8-417D-99D7-D42EDC3012A8</key>
@@ -122,6 +137,10 @@ python etherscan.py $query</string>
 			<integer>100</integer>
 		</dict>
 	</dict>
+	<key>variablesdontexport</key>
+	<array/>
+	<key>version</key>
+	<string>1.0.0</string>
 	<key>webaddress</key>
 	<string>https://mattsolomon.dev</string>
 </dict>
