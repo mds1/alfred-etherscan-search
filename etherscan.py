@@ -5,12 +5,13 @@ import sys
 
 # Workflow3 supports Alfred 3's new features. The `Workflow` class
 # is also compatible with Alfred 2.
-from workflow import Workflow3, ICON_WARNING
+from workflow import Workflow3, ICON_WARNING, ICON_INFO
 
 log = Workflow3.logger
 
+
 def main(wf):
-    log.debug('Execution started')
+    log.debug("Execution started")
     # The Workflow3 instance will be passed to the function
     # you call from `Workflow3.run`.
     # Not super useful, as the `wf` object created in
@@ -27,12 +28,12 @@ def main(wf):
 
     # Do stuff here ...
     query = sys.argv[1].lower()  # this is the address/keyword input by the user
-    log.debug('Query: ' + query)
+    log.debug("Query: " + query)
 
     # Set defaults
-    title="No results found"
-    icon=ICON_WARNING
-    url=False
+    title = "No results found"
+    icon = ICON_WARNING
+    url = False
 
     if query == "d" or query == "da" or query == "dai":
         title = "View Dai on Etherscan"
@@ -54,7 +55,14 @@ def main(wf):
         icon = "img/usdc.png"
         url = "https://etherscan.io/token/0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48"
 
-    elif query == "m" or query == "ma" or query == "mak" or query == "make" or query == "maker" or query == "mkr":
+    elif (
+        query == "m"
+        or query == "ma"
+        or query == "mak"
+        or query == "make"
+        or query == "maker"
+        or query == "mkr"
+    ):
         title = "View Maker on Etherscan"
         icon = "img/maker.png"
         url = "https://etherscan.io/token/0x9f8f72aa9304c8b593d555f12ef6589cc3a579a2"
@@ -92,35 +100,35 @@ def main(wf):
         icon = "img/tether.png"
         url = "https://etherscan.io/token/0x4ddc2d193948926d02f9b1fe9e1daa0718270ed5"
 
-    elif query[-4:] == '.eth':
+    elif query[-4:] == ".eth":
         title = "View ENS address '" + query + "'"
-        icon = 'img/ens.png'
+        icon = "img/ens.png"
         url = "https://etherscan.io/enslookup?q=" + query
 
     elif len(query) == 66 or len(query) == 64:
         title = "View transaction '" + query + "'"
-        icon = 'icon.png'
+        icon = "icon.png"
         url = "https://etherscan.io/tx/" + query
 
     elif len(query) == 42 or len(query) == 40:
         title = "View address '" + query + "'"
-        icon = 'icon.png'
+        icon = "icon.png"
         url = "https://etherscan.io/address/" + query
 
     else:
         # If alphanumeric, append .eth and use ENS
         if query.isalnum():
             title = "View ENS address '" + query + ".eth" + "'"
-            icon = 'img/ens.png'
+            icon = "img/ens.png"
             url = "https://etherscan.io/enslookup?q=" + query + ".eth"
 
         # if query contains periods
         if "." in query:
-            splitQuery = filter(None, query.split('.'))
+            splitQuery = filter(None, query.split("."))
             ensPrefix = ".".join(splitQuery)
             ensDomain = ensPrefix + ".eth"
             title = "View ENS address '" + ensDomain
-            icon = 'img/ens.png'
+            icon = "img/ens.png"
             url = "https://etherscan.io/enslookup?q=" + ensDomain
 
     # Add an item to Alfred feedback
@@ -139,8 +147,17 @@ def main(wf):
 
 if __name__ == "__main__":
     # Create a global `Workflow3` object
-    wf = Workflow3()
+    wf = Workflow3(update_settings={"github_slug": "mds1/alfred-etherscan-search"})
     log = wf.logger
+
+    # Check for updates
+    # http://www.deanishe.net/alfred-workflow/guide/update.html#guide-updates
+    if wf.update_available:
+        wf.add_item('New version available',
+                'Action this item to install the update',
+                autocomplete='workflow:update',
+                icon=ICON_INFO)
+
     # Call your entry function via `Workflow3.run()` to enable its
     # helper functions, like exception catching, ARGV normalization,
     # magic arguments etc.

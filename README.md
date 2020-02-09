@@ -1,6 +1,6 @@
 # Alfred Etherscan Search
 
-Alfred workflow to simply searches on Etherscan
+Alfred workflow to quickly search addresses, transactions, and ENS Domains on Etherscan
 
 - [Alfred Etherscan Search](#alfred-etherscan-search)
   - [Installation](#installation)
