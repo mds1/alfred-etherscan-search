@@ -27,7 +27,8 @@ def main(wf):
     args = wf.args
 
     # Do stuff here ...
-    query = sys.argv[1].lower()  # this is the address/keyword input by the user
+    # this is the address/keyword input by the user
+    query = sys.argv[1].lower()
     log.debug("Query: " + query)
 
     # Set defaults
@@ -120,7 +121,7 @@ def main(wf):
         if query.isalnum():
             title = "View ENS address '" + query + ".eth" + "'"
             icon = "img/ens.png"
-            url = "https://etherscan.io/enslookup?q=" + query + ".eth"
+            url = "https://etherscan.io/enslookup-search?search=" + query + ".eth"
 
         # if query contains periods
         if "." in query:
@@ -129,7 +130,7 @@ def main(wf):
             ensDomain = ensPrefix + ".eth"
             title = "View ENS address '" + ensDomain
             icon = "img/ens.png"
-            url = "https://etherscan.io/enslookup?q=" + ensDomain
+            url = "https://etherscan.io/enslookup-search?search=" + ensDomain
 
     # Add an item to Alfred feedback
     wf.add_item(
@@ -147,16 +148,17 @@ def main(wf):
 
 if __name__ == "__main__":
     # Create a global `Workflow3` object
-    wf = Workflow3(update_settings={"github_slug": "mds1/alfred-etherscan-search"})
+    wf = Workflow3(update_settings={
+                   "github_slug": "mds1/alfred-etherscan-search"})
     log = wf.logger
 
     # Check for updates
     # http://www.deanishe.net/alfred-workflow/guide/update.html#guide-updates
     if wf.update_available:
         wf.add_item('New version available',
-                'Action this item to install the update',
-                autocomplete='workflow:update',
-                icon=ICON_INFO)
+                    'Action this item to install the update',
+                    autocomplete='workflow:update',
+                    icon=ICON_INFO)
 
     # Call your entry function via `Workflow3.run()` to enable its
     # helper functions, like exception catching, ARGV normalization,
