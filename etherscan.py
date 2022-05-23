@@ -104,7 +104,7 @@ def main(wf):
     elif query[-4:] == ".eth":
         title = "View ENS address '" + query + "'"
         icon = "img/ens.png"
-        url = "https://etherscan.io/enslookup?q=" + query
+        url = "https://etherscan.io/enslookup-search?search=" + query
 
     elif len(query) == 66 or len(query) == 64:
         title = "View transaction '" + query + "'"
